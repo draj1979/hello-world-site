@@ -2,14 +2,162 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Hello World</title>
+  <title>Kartavya</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; background: #0f172a; color: #f8fafc; }
-    h1 { font-size: clamp(2rem, 8vw, 5rem); }
+    :root {
+      --bg-1: #0b0820;
+      --bg-2: #1b0f3a;
+      --accent-1: #ff7ab6;
+      --accent-2: #7afcff;
+      --accent-3: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+    body {
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+      color: #f8fafc;
+      background: radial-gradient(ellipse at 20% 10%, var(--bg-2), var(--bg-1) 60%);
+      overflow: hidden;
+    }
+
+    /* Hero "image": animated gradient + orbs */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .hero::before,
+    .hero::after,
+    .orb {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.55;
+      z-index: -1;
+      animation: float 14s ease-in-out infinite;
+    }
+    .hero::before {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, var(--accent-1), transparent 60%);
+      top: -120px; left: -120px;
+    }
+    .hero::after {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--accent-2), transparent 60%);
+      bottom: -160px; right: -160px;
+      animation-delay: -6s;
+    }
+    .orb {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, var(--accent-3), transparent 60%);
+      top: 40%; left: 55%;
+      animation-delay: -3s;
+      opacity: 0.4;
+    }
+    @keyframes float {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%     { transform: translate(40px,-30px) scale(1.08); }
+      66%     { transform: translate(-30px,40px) scale(0.95); }
+    }
+
+    /* Subtle grid overlay for depth */
+    .hero::before, .hero::after { pointer-events: none; }
+    .grid {
+      position: absolute; inset: 0; z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+    }
+
+    /* Headline */
+    .name {
+      font-weight: 800;
+      font-size: clamp(3.5rem, 14vw, 11rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin: 0;
+      display: flex;
+      gap: 0.02em;
+      background: linear-gradient(120deg, var(--accent-1), var(--accent-3) 40%, var(--accent-2) 80%);
+      background-size: 250% 250%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 8s ease-in-out infinite;
+      filter: drop-shadow(0 8px 30px rgba(255,122,182,0.25));
+    }
+    @keyframes shimmer {
+      0%,100% { background-position: 0% 50%; }
+      50%     { background-position: 100% 50%; }
+    }
+
+    .name span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(40px) rotate(-8deg);
+      animation: drop 0.9s cubic-bezier(.2,.8,.2,1) forwards, bob 4s ease-in-out infinite;
+    }
+    .name span:nth-child(1) { animation-delay: 0.05s, 1.2s; }
+    .name span:nth-child(2) { animation-delay: 0.15s, 1.4s; }
+    .name span:nth-child(3) { animation-delay: 0.25s, 1.6s; }
+    .name span:nth-child(4) { animation-delay: 0.35s, 1.8s; }
+    .name span:nth-child(5) { animation-delay: 0.45s, 2.0s; }
+    .name span:nth-child(6) { animation-delay: 0.55s, 2.2s; }
+    .name span:nth-child(7) { animation-delay: 0.65s, 2.4s; }
+    .name span:nth-child(8) { animation-delay: 0.75s, 2.6s; }
+
+    @keyframes drop {
+      to { opacity: 1; transform: translateY(0) rotate(0); }
+    }
+    @keyframes bob {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-8px); }
+    }
+
+    .tagline {
+      margin-top: 1.5rem;
+      font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(248, 250, 252, 0.7);
+      opacity: 0;
+      animation: fade 1s ease 1.4s forwards;
+    }
+    @keyframes fade { to { opacity: 1; } }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .name span { opacity: 1; transform: none; }
+      .tagline { opacity: 1; }
+    }
   </style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
+  <section class="hero">
+    <div class="grid" aria-hidden="true"></div>
+    <div class="orb" aria-hidden="true"></div>
+    <div class="stack">
+      <h1 class="name" aria-label="Kartavya">
+        <span>K</span><span>a</span><span>r</span><span>t</span><span>a</span><span>v</span><span>y</span><span>a</span>
+      </h1>
+      <p class="tagline">Hello, world</p>
+    </div>
+  </section>
 </body>
 </html>
