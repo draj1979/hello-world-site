@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Kartavya</title>
+  <title>Kartavya Technology | AI Venture Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="description" content="Kartavya Technology is a Venture Builder dedicated to conceiving, building, and scaling AI-first companies with long-term ownership and execution focus." />
   <style>
     :root {
       --bg-1: #0b0820;
@@ -14,23 +15,24 @@
       --accent-3: #ffd166;
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; height: 100%; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
     body {
       font-family: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
       color: #f8fafc;
       background: radial-gradient(ellipse at 20% 10%, var(--bg-2), var(--bg-1) 60%);
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     /* Hero "image": animated gradient + orbs */
     .hero {
       position: relative;
       width: 100%;
-      height: 100vh;
+      min-height: 100vh;
       display: grid;
       place-items: center;
       isolation: isolate;
       overflow: hidden;
+      padding: 6rem 1.5rem 4rem;
     }
     .hero::before,
     .hero::after,
@@ -42,6 +44,7 @@
       opacity: 0.55;
       z-index: -1;
       animation: float 14s ease-in-out infinite;
+      pointer-events: none;
     }
     .hero::before {
       width: 520px; height: 520px;
@@ -67,8 +70,6 @@
       66%     { transform: translate(-30px,40px) scale(0.95); }
     }
 
-    /* Subtle grid overlay for depth */
-    .hero::before, .hero::after { pointer-events: none; }
     .grid {
       position: absolute; inset: 0; z-index: -1;
       background-image:
@@ -78,15 +79,36 @@
       mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
     }
 
-    /* Headline */
-    .name {
-      font-weight: 800;
-      font-size: clamp(3.5rem, 14vw, 11rem);
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin: 0;
+    .stack {
+      max-width: 980px;
+      text-align: center;
       display: flex;
-      gap: 0.02em;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .headline {
+      font-weight: 800;
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin: 0;
+    }
+    .headline .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: rise 0.8s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .headline .word:nth-child(1) { animation-delay: 0.10s; }
+    .headline .word:nth-child(2) { animation-delay: 0.18s; }
+    .headline .word:nth-child(3) { animation-delay: 0.26s; }
+    .headline .word:nth-child(4) { animation-delay: 0.34s; }
+    .headline .word:nth-child(5) { animation-delay: 0.42s; }
+    .headline .word:nth-child(6) { animation-delay: 0.50s; }
+    .headline .word:nth-child(7) { animation-delay: 0.58s; }
+
+    .accent {
       background: linear-gradient(120deg, var(--accent-1), var(--accent-3) 40%, var(--accent-2) 80%);
       background-size: 250% 250%;
       -webkit-background-clip: text;
@@ -99,48 +121,54 @@
       0%,100% { background-position: 0% 50%; }
       50%     { background-position: 100% 50%; }
     }
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    .name span {
-      display: inline-block;
+    .subline {
+      margin: 1.75rem auto 0;
+      max-width: 720px;
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      line-height: 1.6;
+      color: rgba(248, 250, 252, 0.78);
       opacity: 0;
-      transform: translateY(40px) rotate(-8deg);
-      animation: drop 0.9s cubic-bezier(.2,.8,.2,1) forwards, bob 4s ease-in-out infinite;
-    }
-    .name span:nth-child(1) { animation-delay: 0.05s, 1.2s; }
-    .name span:nth-child(2) { animation-delay: 0.15s, 1.4s; }
-    .name span:nth-child(3) { animation-delay: 0.25s, 1.6s; }
-    .name span:nth-child(4) { animation-delay: 0.35s, 1.8s; }
-    .name span:nth-child(5) { animation-delay: 0.45s, 2.0s; }
-    .name span:nth-child(6) { animation-delay: 0.55s, 2.2s; }
-    .name span:nth-child(7) { animation-delay: 0.65s, 2.4s; }
-    .name span:nth-child(8) { animation-delay: 0.75s, 2.6s; }
-
-    @keyframes drop {
-      to { opacity: 1; transform: translateY(0) rotate(0); }
-    }
-    @keyframes bob {
-      0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-8px); }
+      animation: rise 0.9s ease 0.7s forwards;
     }
 
-    .tagline {
-      margin-top: 1.5rem;
-      font-size: clamp(0.9rem, 1.4vw, 1.1rem);
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: rgba(248, 250, 252, 0.7);
-      opacity: 0;
-      animation: fade 1s ease 1.4s forwards;
-    }
-    @keyframes fade { to { opacity: 1; } }
-
-    .stack {
+    .cta-group {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 0 1.5rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2.25rem;
+      opacity: 0;
+      animation: rise 0.9s ease 0.95s forwards;
     }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      color: #0b0820;
+      background: linear-gradient(120deg, var(--accent-1), var(--accent-3) 50%, var(--accent-2));
+      box-shadow: 0 10px 30px rgba(255, 122, 182, 0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(255, 122, 182, 0.45); }
+    .btn-outline {
+      color: #f8fafc;
+      background: transparent;
+      border-color: rgba(248, 250, 252, 0.35);
+    }
+    .btn-outline:hover { background: rgba(248, 250, 252, 0.08); transform: translateY(-2px); }
 
     /* Logo (top-left) */
     .logo {
@@ -181,24 +209,38 @@
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
-      .name span { opacity: 1; transform: none; }
-      .tagline { opacity: 1; }
+      .headline .word, .subline, .cta-group, .logo { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
   <section class="hero">
-    <a class="logo" href="/" aria-label="Kartavya home">
+    <a class="logo" href="/" aria-label="Kartavya Technology home">
       <span class="logo-mark" aria-hidden="true">K</span>
       <span class="logo-word">Kartavya</span>
     </a>
     <div class="grid" aria-hidden="true"></div>
     <div class="orb" aria-hidden="true"></div>
+
     <div class="stack">
-      <h1 class="name" aria-label="Kartavya">
-        <span>K</span><span>a</span><span>r</span><span>t</span><span>a</span><span>v</span><span>y</span><span>a</span>
+      <h1 class="headline">
+        <span class="word">We</span>
+        <span class="word">Conceive,</span>
+        <span class="word">Build,</span>
+        <span class="word">and</span>
+        <span class="word">Scale</span>
+        <span class="word accent">AI-First</span>
+        <span class="word accent">Companies.</span>
       </h1>
-      <p class="tagline">Hello, world</p>
+      <p class="subline">
+        Kartavya Technology is a Venture Builder. We don't just invest or advise.
+        We provide the leadership, architecture, and execution engine to turn ideas
+        into category-defining AI companies.
+      </p>
+      <div class="cta-group">
+        <a class="btn btn-primary" href="#model">Our Model</a>
+        <a class="btn btn-outline" href="#build">Build With Us</a>
+      </div>
     </div>
   </section>
 </body>
