@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <title>Kartavya</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <style>
     :root {
       --bg-1: #0b0820;
@@ -141,6 +142,43 @@
       padding: 0 1.5rem;
     }
 
+    /* Logo (top-left) */
+    .logo {
+      position: absolute;
+      top: clamp(1rem, 2.5vw, 2rem);
+      left: clamp(1rem, 2.5vw, 2rem);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+      color: #f8fafc;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: fade-down 0.8s ease 0.2s forwards;
+    }
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-3) 55%, var(--accent-2));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 6px 20px rgba(255, 122, 182, 0.35);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #0b0820;
+      letter-spacing: -0.04em;
+    }
+    .logo-word {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+    @keyframes fade-down {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .name span { opacity: 1; transform: none; }
@@ -150,6 +188,10 @@
 </head>
 <body>
   <section class="hero">
+    <a class="logo" href="/" aria-label="Kartavya home">
+      <span class="logo-mark" aria-hidden="true">K</span>
+      <span class="logo-word">Kartavya</span>
+    </a>
     <div class="grid" aria-hidden="true"></div>
     <div class="orb" aria-hidden="true"></div>
     <div class="stack">
